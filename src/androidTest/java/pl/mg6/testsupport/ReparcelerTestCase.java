@@ -2,6 +2,7 @@ package pl.mg6.testsupport;
 
 import junit.framework.TestCase;
 
+import pl.mg6.testsupport.data.Hrisey;
 import pl.mg6.testsupport.data.Simple;
 import pl.mg6.testsupport.data.WithNonStaticCreator;
 import pl.mg6.testsupport.data.WithProtectedCreator;
@@ -15,6 +16,15 @@ public class ReparcelerTestCase extends TestCase {
         ReparcelingResult<Simple> result = reparceler.reparcel(simple);
         assertSame(simple, result.getOriginal());
         assertNotSame(simple, result.getReparceled());
+        assertTrue(result.areEqual());
+        assertNull(result.getError());
+    }
+
+    public void testHriseyParcelableShouldBeEqual() {
+        Hrisey hrisey = new Hrisey(42, "Answer");
+        ReparcelingResult<Hrisey> result = reparceler.reparcel(hrisey);
+        assertSame(hrisey, result.getOriginal());
+        assertNotSame(hrisey, result.getReparceled());
         assertTrue(result.areEqual());
         assertNull(result.getError());
     }

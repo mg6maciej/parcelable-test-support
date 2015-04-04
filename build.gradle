@@ -33,4 +33,5 @@ android {
 
 dependencies {
     compile 'org.unitils:unitils-core:3.4.2'
+    androidTestProvided 'pl.mg6.hrisey:hrisey:0.3.1'
 }
