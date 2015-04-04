@@ -34,4 +34,6 @@ android {
 dependencies {
     compile 'org.unitils:unitils-core:3.4.2'
     androidTestProvided 'pl.mg6.hrisey:hrisey:0.3.1'
+    androidTestCompile 'org.parceler:parceler-api:0.2.16'
+    androidTestProvided 'org.parceler:parceler:0.2.16'
 }

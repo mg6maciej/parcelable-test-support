@@ -1,8 +1,13 @@
 package pl.mg6.testsupport;
 
+import android.os.Parcelable;
+
 import junit.framework.TestCase;
 
+import org.parceler.Parcels;
+
 import pl.mg6.testsupport.data.Hrisey;
+import pl.mg6.testsupport.data.Parceler;
 import pl.mg6.testsupport.data.Simple;
 import pl.mg6.testsupport.data.WithNonStaticCreator;
 import pl.mg6.testsupport.data.WithProtectedCreator;
@@ -25,6 +30,16 @@ public class ReparcelerTestCase extends TestCase {
         ReparcelingResult<Hrisey> result = reparceler.reparcel(hrisey);
         assertSame(hrisey, result.getOriginal());
         assertNotSame(hrisey, result.getReparceled());
+        assertTrue(result.areEqual());
+        assertNull(result.getError());
+    }
+
+    public void testParcelerParcelableShouldBeEqual() {
+        Parceler parceler = new Parceler(256, "MAX");
+        Parcelable parcelable = Parcels.wrap(parceler);
+        ReparcelingResult<Parcelable> result = reparceler.reparcel(parcelable);
+        assertSame(parcelable, result.getOriginal());
+        assertNotSame(parcelable, result.getReparceled());
         assertTrue(result.areEqual());
         assertNull(result.getError());
     }
