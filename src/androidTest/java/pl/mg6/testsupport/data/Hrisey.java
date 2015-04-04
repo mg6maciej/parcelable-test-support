@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 @Parcelable
 @AllArgsConstructor(suppressConstructorProperties = true)
-public class Hrisey implements android.os.Parcelable {
+public final class Hrisey implements android.os.Parcelable {
 
     private int id;
     private String key;
