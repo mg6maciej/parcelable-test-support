@@ -21,4 +21,12 @@ public class FactoryReparcelerTestCase extends TestCase {
             assertNull(result.getError());
         }
     }
+
+    public void testFactoryReparcelerShouldFindAllMethods() {
+        List<ReparcelingResult<Simple>> resultList = reparceler.reparcel(SimpleFactory.class, Simple.class);
+        assertEquals(3, resultList.size());
+        assertEquals("withZero", resultList.get(2).getMethodName());
+        assertEquals("withPerfectNumber", resultList.get(1).getMethodName());
+        assertEquals("withMaxValue", resultList.get(0).getMethodName());
+    }
 }
