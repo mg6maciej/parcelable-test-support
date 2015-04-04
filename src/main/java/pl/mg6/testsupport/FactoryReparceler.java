@@ -10,10 +10,10 @@ import static java.lang.reflect.Modifier.isStatic;
 
 public class FactoryReparceler {
 
-    public <T extends Parcelable> ReparcelingResultList<T> reparcel(Class<?> factoryClass, Class<T> parcelableClass) {
+    public <T extends Parcelable> ReparcelingResultList<T> reparcel(Class<?> factoryClass) {
         List<ReparcelingResult<T>> results = new ArrayList<>();
         for (Method method : factoryClass.getMethods()) {
-            if (staticNoParamsReturningParcelable(method, parcelableClass)) {
+            if (staticNoParamsReturningParcelable(method)) {
                 ReparcelingResult<T> result = reparcel(method);
                 results.add(result);
             }
@@ -21,10 +21,10 @@ public class FactoryReparceler {
         return new ReparcelingResultList<>(results);
     }
 
-    private static boolean staticNoParamsReturningParcelable(Method method, Class<? extends Parcelable> parcelableClass) {
+    private static boolean staticNoParamsReturningParcelable(Method method) {
         return isStatic(method.getModifiers())
                 && method.getParameterTypes().length == 0
-                && method.getReturnType() == parcelableClass;
+                && Parcelable.class.isAssignableFrom(method.getReturnType());
     }
 
     private static <T extends Parcelable> ReparcelingResult<T> reparcel(Method method) {

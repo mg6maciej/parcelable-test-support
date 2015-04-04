@@ -10,7 +10,7 @@ public class FactoryReparcelerTestCase extends TestCase {
     private final FactoryReparceler factoryReparceler = new FactoryReparceler();
 
     public void testSimpleParcelableShouldBeEqual() {
-        ReparcelingResultList<Simple> resultList = factoryReparceler.reparcel(SimpleFactory.class, Simple.class);
+        ReparcelingResultList<Simple> resultList = factoryReparceler.reparcel(SimpleFactory.class);
         for (ReparcelingResult<Simple> result : resultList) {
             assertNotNull(result.getOriginal());
             assertNotNull(result.getReparceled());
@@ -21,7 +21,7 @@ public class FactoryReparcelerTestCase extends TestCase {
     }
 
     public void testFactoryReparcelerShouldFindAllMethods() {
-        ReparcelingResultList<Simple> resultList = factoryReparceler.reparcel(SimpleFactory.class, Simple.class);
+        ReparcelingResultList<Simple> resultList = factoryReparceler.reparcel(SimpleFactory.class);
         assertEquals(3, resultList.size());
         assertEquals("withMaxValue", resultList.get(0).getMethodName());
         assertEquals("withPerfectNumber", resultList.get(1).getMethodName());
@@ -29,7 +29,7 @@ public class FactoryReparcelerTestCase extends TestCase {
     }
 
     public void testFacotryReparcelerAllShouldBeEqual() {
-        ReparcelingResultList<Simple> resultList = factoryReparceler.reparcel(SimpleFactory.class, Simple.class);
+        ReparcelingResultList<Simple> resultList = factoryReparceler.reparcel(SimpleFactory.class);
         assertTrue(resultList.areAllEqual());
     }
 }
