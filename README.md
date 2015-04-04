@@ -1,5 +1,7 @@
 # Parcelable Test Support
 
+[![Build Status](https://travis-ci.org/mg6maciej/parcelable-test-support.svg?branch=master)](https://travis-ci.org/mg6maciej/parcelable-test-support)
+
 Small library to help with testing Parcelable classes.
 
 Testing `Parcelable` classes is simple. You just need to write your object to `Parcel` and then recreate it.
