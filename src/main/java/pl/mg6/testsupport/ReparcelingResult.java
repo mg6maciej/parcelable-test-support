@@ -10,7 +10,7 @@ public class ReparcelingResult<T extends Parcelable> {
     private final String methodName;
     private final ReparcelingError error;
 
-    public ReparcelingResult(T original, T reparceled, boolean areEqual, String methodName, ReparcelingError error) {
+    ReparcelingResult(T original, T reparceled, boolean areEqual, String methodName, ReparcelingError error) {
         this.original = original;
         this.reparceled = reparceled;
         this.areEqual = areEqual;
