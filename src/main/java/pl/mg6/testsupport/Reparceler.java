@@ -34,6 +34,7 @@ public class Reparceler {
 
     private static ReparcelingError createError(Parcelable original, Throwable error) {
         String name = original.getClass().getSimpleName();
-        return new ReparcelingError(String.format("Missing public static CREATOR field on class %s.", name), error);
+        String message = String.format("Missing public static CREATOR field on class %s.", name);
+        return new ReparcelingError(message, error);
     }
 }

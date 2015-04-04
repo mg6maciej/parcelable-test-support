@@ -32,7 +32,14 @@ public class FactoryReparceler {
             T original = (T) method.invoke(null);
             return Reparceler.reparcel(original, method.getName());
         } catch (Throwable error) {
-            return new ReparcelingResult<>(null, null, false, method.getName(), error);
+            return new ReparcelingResult<>(null, null, false, method.getName(), createError(method, error));
         }
+    }
+
+    private static ReparcelingError createError(Method method, Throwable error) {
+        String methodName = method.getName();
+        String className = method.getDeclaringClass().getSimpleName();
+        String message = String.format("Cannot invoke method %s on class %s.", methodName, className);
+        return new ReparcelingError(message, error);
     }
 }

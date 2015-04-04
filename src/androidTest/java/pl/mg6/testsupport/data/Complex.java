@@ -18,7 +18,6 @@ public final class Complex implements Parcelable {
         this.list = list;
     }
 
-
     @Override
     public int describeContents() {
         return 0;

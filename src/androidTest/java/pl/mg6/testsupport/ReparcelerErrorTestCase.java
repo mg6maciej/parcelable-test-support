@@ -14,7 +14,7 @@ public class ReparcelerErrorTestCase extends TestCase {
         ReparcelingResult<WithProtectedCreator> result = reparceler.reparcel(original);
         assertSame(original, result.getOriginal());
         assertNull(result.getReparceled());
-        assertTrue(result.getError() instanceof ReparcelingError);
+        assertNotNull(result.getError());
         assertEquals("Missing public static CREATOR field on class WithProtectedCreator.", result.getError().getMessage());
     }
 
@@ -23,7 +23,7 @@ public class ReparcelerErrorTestCase extends TestCase {
         ReparcelingResult<WithNonStaticCreator> result = reparceler.reparcel(original);
         assertSame(original, result.getOriginal());
         assertNull(result.getReparceled());
-        assertTrue(result.getError() instanceof ReparcelingError);
+        assertNotNull(result.getError());
         assertEquals("Missing public static CREATOR field on class WithNonStaticCreator.", result.getError().getMessage());
     }
 }
