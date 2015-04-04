@@ -12,7 +12,7 @@ public class FactoryReparcelerTestCase extends TestCase {
     private final FactoryReparceler reparceler = new FactoryReparceler();
 
     public void testSimpleParcelableShouldBeEqual() {
-        List<ReparcelingResult<Simple>> resultList = reparceler.reparcel(SimpleFactory.class, Simple.class);
+        ReparcelingResultList<Simple> resultList = reparceler.reparcel(SimpleFactory.class, Simple.class);
         for (ReparcelingResult<Simple> result : resultList) {
             assertNotNull(result.getOriginal());
             assertNotNull(result.getReparceled());
@@ -23,7 +23,7 @@ public class FactoryReparcelerTestCase extends TestCase {
     }
 
     public void testFactoryReparcelerShouldFindAllMethods() {
-        List<ReparcelingResult<Simple>> resultList = reparceler.reparcel(SimpleFactory.class, Simple.class);
+        ReparcelingResultList<Simple> resultList = reparceler.reparcel(SimpleFactory.class, Simple.class);
         assertEquals(3, resultList.size());
         assertEquals("withZero", resultList.get(2).getMethodName());
         assertEquals("withPerfectNumber", resultList.get(1).getMethodName());
