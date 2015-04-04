@@ -38,7 +38,7 @@ public final class Simple implements Parcelable {
         this.value = in.readInt();
     }
 
-    public static final Parcelable.Creator<Simple> CREATOR = new Parcelable.Creator<Simple>() {
+    public static final Creator<Simple> CREATOR = new Creator<Simple>() {
         public Simple createFromParcel(Parcel source) {
             return new Simple(source);
         }

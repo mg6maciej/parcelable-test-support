@@ -10,22 +10,29 @@ import static java.lang.reflect.Modifier.isStatic;
 
 public class FactoryReparceler {
 
-    public <T extends Parcelable> List<ReparcelResult<T>> reparcel(Class<?> factoryClass, Class<T> parcelableClass) {
-        List<ReparcelResult<T>> resultList = new ArrayList<>();
-        Reparceler reparceler = new Reparceler();
-        for (Method m : factoryClass.getMethods()) {
-            if (isStatic(m.getModifiers()) && m.getParameterTypes().length == 0 && m.getReturnType() == parcelableClass) {
-                ReparcelResult<T> result;
-                String methodName = m.getName();
-                try {
-                    T original = (T) m.invoke(null);
-                    result = reparceler.reparcel(original, methodName);
-                } catch (Throwable error) {
-                    result = new ReparcelResult<>(null, null, false, methodName, error);
-                }
+    public <T extends Parcelable> List<ReparcelingResult<T>> reparcel(Class<?> factoryClass, Class<T> parcelableClass) {
+        List<ReparcelingResult<T>> resultList = new ArrayList<>();
+        for (Method method : factoryClass.getMethods()) {
+            if (staticNoParamsReturningParcelable(method, parcelableClass)) {
+                ReparcelingResult<T> result = reparcel(method);
                 resultList.add(result);
             }
         }
         return resultList;
+    }
+
+    private static boolean staticNoParamsReturningParcelable(Method method, Class<? extends Parcelable> parcelableClass) {
+        return isStatic(method.getModifiers())
+                && method.getParameterTypes().length == 0
+                && method.getReturnType() == parcelableClass;
+    }
+
+    private static <T extends Parcelable> ReparcelingResult<T> reparcel(Method method) {
+        try {
+            T original = (T) method.invoke(null);
+            return Reparceler.reparcel(original, method.getName());
+        } catch (Throwable error) {
+            return new ReparcelingResult<>(null, null, false, method.getName(), error);
+        }
     }
 }
