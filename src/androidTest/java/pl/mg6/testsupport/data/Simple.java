@@ -12,19 +12,6 @@ public final class Simple implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Simple simple = (Simple) o;
-        return value == simple.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return value;
-    }
-
-    @Override
     public int describeContents() {
         return 0;
     }

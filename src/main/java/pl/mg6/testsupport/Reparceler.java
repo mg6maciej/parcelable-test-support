@@ -3,6 +3,8 @@ package pl.mg6.testsupport;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.unitils.reflectionassert.ReflectionComparatorFactory;
+
 import java.lang.reflect.Field;
 
 public class Reparceler {
@@ -14,7 +16,7 @@ public class Reparceler {
     static <T extends Parcelable> ReparcelingResult<T> reparcel(T original, String methodName) {
         try {
             T reparceled = reparcelImpl(original);
-            boolean areEqual = original.equals(reparceled);
+            boolean areEqual = ReflectionComparatorFactory.createRefectionComparator().isEqual(original, reparceled);
             return new ReparcelingResult<>(original, reparceled, areEqual, methodName, null);
         } catch (Throwable error) {
             return new ReparcelingResult<>(original, null, false, methodName, createError(original, error));

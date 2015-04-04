@@ -23,4 +23,14 @@ android {
         versionCode 1000000
         versionName '1.0'
     }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+dependencies {
+    compile 'org.unitils:unitils-core:3.4.2'
 }
